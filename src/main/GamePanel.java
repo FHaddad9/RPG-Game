@@ -7,12 +7,14 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 	
 	// screen dimensions
 	final int normalTileSize = 16;	// 16x16 tiles, basically since it's 16 bit game
 	final int scale = 3;	// Enlarge the 16 pixels
-	final int tileSize = normalTileSize * scale;	// Scaled tile
+	public final int tileSize = normalTileSize * scale;	// Scaled tile
 	
 	// Ratio 4:3 screen
 	final int screenCol = 16;
@@ -25,6 +27,9 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// Gets keys pressed by user
 	KeyHandler key = new KeyHandler();
+	
+	// Get player class for entitys
+	Player player = new Player(this, key);
 	
 	// Player's default position
 	int posX = 100;
@@ -51,55 +56,46 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread.start();
 	}
 	
-	@Override
 	public void run() {
 		
 		// Update: update information
 		// Draw: draw screen with information
 		
-		// Main part of game to keep it running
+		// Interval is 1 second in 1 billion nanoseconds
+		double interval = 1000000000 / fps;	// 0.01666 seconds
+		double delta = 0;
+		
+		long lastTime = System.nanoTime();
+		long currentTime;
+		long timer = 0;
+		int drawCount = 0;
+		
+		// Delta gets the interval between the time when loop started and current time and repaints
 		while(gameThread != null) {
 			
-			// Interval is 1 second in 1 billion nanoseconds
-			double interval = 1000000000 / fps;	// 0.01666 seconds
-			double nextTime = System.nanoTime() + interval;	
+			currentTime = System.nanoTime();
 			
-			update();
+			delta += (currentTime - lastTime) / interval;
+			timer += (currentTime - lastTime);
+			lastTime = currentTime;
 			
-			repaint();
+			if(delta >= 1) {
+				update();
+				repaint();
+				delta--;
+				drawCount++;
+			}		
 			
-			try {
-				
-				double remainingTime = nextTime - System.nanoTime();
-				remainingTime = remainingTime / 1000000;
-				
-				if(remainingTime < 0) {
-					remainingTime = 0;
-				}
-				
-				Thread.sleep((long) remainingTime);
-				
-				nextTime += interval;
-				
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
+			if(timer >= 1000000000) {
+				System.out.println("FPS: " + drawCount);
+				drawCount = 0;
+				timer = 0;
 			}
 		}
 	}
 	
 	public void update() {
-		
-		// When user presses key, player position moves by 4 (speed) pixels
-		if(key.up) {
-			posY -= speed;
-		} else if(key.down) {
-			posY += speed;
-		} else if(key.left) {
-			posX -= speed;
-		} else if(key.right) {
-			posX += speed;
-		}
+		player.update();		
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -107,11 +103,9 @@ public class GamePanel extends JPanel implements Runnable{
 		super.paintComponent(g);
 		
 		// Graphics2D better than Graphics
-		Graphics g2 = (Graphics2D)g;
-		
-		// Temporary "Character" for game. Which is just a white square :p
-		g2.setColor(Color.white);		
-		g2.fillRect(posX, posY, tileSize, tileSize);
+		Graphics2D g2 = (Graphics2D)g;
+
+		player.draw(g2);
 		
 		g2.dispose();
 	}
