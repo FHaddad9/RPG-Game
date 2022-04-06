@@ -78,14 +78,14 @@ public class Player extends Entity{
 		try {
 			
 			// Gets images of sprites into IO and displays
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_up_1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_up_2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_down_1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_down_2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_left_1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_left_2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_right_1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/oldman_right_2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Up1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Up2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Down2.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Down3.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Right.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Right2.png"));
 			
 		} catch(IOException e) {
 			e.printStackTrace();
