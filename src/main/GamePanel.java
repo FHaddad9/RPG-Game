@@ -23,6 +23,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenWidth = tileSize * screenCol;	// 768 pixel
 	public final int screenHeight = tileSize * screenrow;	// 576 pixel
 	
+	// World settings
+	public final int maxWorldCol = 50;
+	public final int maxWorldRow = 50;
+	public final int worldWidth = tileSize * maxWorldCol;
+	public final int worldHeight = tileSize * maxWorldRow;
+	
 	// Controls the time of the game; starting and stopping
 	Thread gameThread;
 	
@@ -30,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable{
 	KeyHandler key = new KeyHandler();
 	
 	// Get player class for entitys
-	Player player = new Player(this, key);
+	public Player player = new Player(this, key);
 		
 	// Frames per second
 	int fps = 60;

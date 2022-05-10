@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 // stores variables for characters
 public class Entity {
 	
-	public int x, y;
+	public int worldX, worldY;
 	public int speed;
 	
 	// Image with accessible buffer image data

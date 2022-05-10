@@ -16,10 +16,16 @@ public class Player extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
 	
+	public final int screenX;
+	public final int screenY;
+	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
 		this.gp = gp;
 		this.keyH = keyH;
+		
+		screenX = gp.screenWidth / 2;
+		screenY = gp.screenHeight / 2;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -27,9 +33,9 @@ public class Player extends Entity{
 	
 	public void setDefaultValues() {
 		
-		// Default position of character
-		x = 100;
-		y = 100;	
+		// Default position of character centre of screen
+		worldX = gp.tileSize * 23 - (gp.tileSize / 2);
+		worldY = gp.tileSize * 21 - (gp.tileSize / 2);	
 		
 		// All characters uses the same speed
 		speed = 4;
@@ -46,16 +52,16 @@ public class Player extends Entity{
 			// When user presses key, player position moves by 4 (speed) pixels
 			if(keyH.up) {
 				direction = "up";
-				y -= speed;
+				worldY -= speed;
 			} else if(keyH.down) {
 				direction = "down";
-				y += speed;
+				worldY += speed;
 			} else if(keyH.left) {
 				direction = "left";
-				x -= speed;
+				worldX -= speed;
 			} else if(keyH.right) {
 				direction = "right";
-				x += speed;
+				worldX += speed;
 			}
 			
 			spriteCounter++;
@@ -140,6 +146,6 @@ public class Player extends Entity{
 			break;
 		}
 		
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 	}
 }
