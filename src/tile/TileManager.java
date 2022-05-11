@@ -24,7 +24,7 @@ public class TileManager {
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
-		loadMap("/maps/land.txt");
+		loadMap("/maps/map.txt");
 	}
 	
 	// Loads tile images
@@ -46,6 +46,8 @@ public class TileManager {
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grassyCobble.png"));
 			tile[6] = new Tile();
 			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/cobble.png"));
+			tile[7] = new Tile();
+			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/dirt.png"));
 			
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -110,7 +112,7 @@ public class TileManager {
 			g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
 			worldCol++;
 			
-			if(worldCol == gp.screenCol) {
+			if(worldCol == gp.maxWorldCol) {
 				worldCol = 0;
 				worldRow++;
 			}
