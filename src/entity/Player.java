@@ -4,6 +4,7 @@ import main.KeyHandler;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -26,6 +27,14 @@ public class Player extends Entity{
 		
 		screenX = gp.screenWidth / 2;
 		screenY = gp.screenHeight / 2;
+		
+		// Sets 4 variables for each corner of rectangle
+		solidArea = new Rectangle();
+		
+		solidArea.x = 28;
+		solidArea.y = 20;
+		solidArea.width = 8;
+		solidArea.height = 32;
 		
 		setDefaultValues();
 		getPlayerImage();
@@ -52,16 +61,34 @@ public class Player extends Entity{
 			// When user presses key, player position moves by 4 (speed) pixels
 			if(keyH.up) {
 				direction = "up";
-				worldY -= speed;
 			} else if(keyH.down) {
 				direction = "down";
-				worldY += speed;
 			} else if(keyH.left) {
 				direction = "left";
-				worldX -= speed;
 			} else if(keyH.right) {
 				direction = "right";
-				worldX += speed;
+			}
+			
+			// Checks tile collisions
+			collisionOn = false;
+			gp.collisionCheck.checkTile(this);
+			
+			// If false, player unable to move
+			if(collisionOn == false) {
+				switch(direction) {
+					case "up":
+						worldY -= speed;
+						break;
+					case "down":
+						worldY += speed;
+						break;
+					case "left":
+						worldX -= speed;
+						break;
+					case "right":
+						worldX += speed;
+						break;
+				}
 			}
 			
 			spriteCounter++;
