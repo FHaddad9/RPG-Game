@@ -41,6 +41,9 @@ public class GamePanel extends JPanel implements Runnable{
 	// Frames per second
 	int fps = 60;
 	
+	// Gets the collisions for entitys
+	public CollisionChecker collisionCheck = new CollisionChecker(this);
+	
 	TileManager tileM = new TileManager(this);
 	
 	public GamePanel() {
