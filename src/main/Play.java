@@ -9,7 +9,7 @@ public class Play {
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setTitle("Adventure");
+		window.setTitle("RPG Adventure");
 		
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
