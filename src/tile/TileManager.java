@@ -23,6 +23,7 @@ public class TileManager {
 		tile = new Tile[14];
 		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
+		// Loads the map of integers each representing a tile
 		getTileImage();
 		loadMap("/maps/map.txt");
 	}
@@ -33,21 +34,22 @@ public class TileManager {
 		try {
 			
 			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/ocean.png"));
+			// Collision becomes unwalkable if true
 			tile[0].collision = true;
 			
 			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
+			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/gr.png"));
 			
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
 			tile[2].collision = true;
 			
 			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grassyCobble.png"));
+			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Cobble2.png"));
 			
 			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/bush.png"));
+			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/daisies.png"));
 			
 			tile[5] = new Tile();
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
@@ -57,14 +59,14 @@ public class TileManager {
 			tile[6].collision = true;
 			
 			tile[7] = new Tile();
-			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/cobble.png"));
+			tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Cobble2.png"));
 			
 			tile[8] = new Tile();
 			tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
 			tile[8].collision = true;
 			
 			tile[9] = new Tile();
-			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/daisy.png"));
+			tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/bush.png"));
 			
 			tile[10] = new Tile();
 			tile[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
@@ -90,6 +92,7 @@ public class TileManager {
 				
 				String line = br.readLine();
 				
+				// Goes through map text file numbering each tile
 				while(col < gp.maxWorldCol) {
 					
 					String nums[] = line.split(" ");
@@ -99,6 +102,8 @@ public class TileManager {
 					mapTileNum[col][row] = num;
 					col++;
 				}
+				
+				// Tiles repeat every line
 				if(col == gp.maxWorldCol) {
 					col = 0;
 					row++;
