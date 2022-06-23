@@ -10,7 +10,7 @@ public class Entity {
 	public int speed;
 	
 	// Image with accessible buffer image data
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
+	public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, right1, right2;
 	
 	public String direction;
 	

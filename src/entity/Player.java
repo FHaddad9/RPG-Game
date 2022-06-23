@@ -103,6 +103,16 @@ public class Player extends Entity{
 				
 				spriteCounter = 0;
 			}
+		} else if(!keyH.up && !keyH.down && !keyH.left && !keyH.right) {
+			if(direction == "down") {
+				direction = "downStill";
+			} else if(direction == "up") {
+				direction = "upStill";
+			} else if(direction == "left") {
+				direction = "leftStill";
+			} else if(direction == "right") {
+				direction = "rightStill";
+			}
 		}
 	}
 	
@@ -113,8 +123,10 @@ public class Player extends Entity{
 			// Gets images of sprites into IO and displays
 			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Up2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Crono.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Locke (Front).png"));
+			up3 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Up.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Down2.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Down3.png"));
+			down3 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Down.png"));
 			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left.png"));
 			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Left2.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Blueman_Right.png"));
@@ -131,6 +143,18 @@ public class Player extends Entity{
 		
 		// Get walking animation between 2 sprites
 		switch(direction) {
+		case "downStill":
+			image = down3;
+			break;
+		case "upStill":
+			image = up3;
+			break;
+		case "rightStill":
+			image = right1;
+			break;
+		case "leftStill":
+			image = left1;
+			break;
 		case "up":
 			if(spriteNum == 1) {
 				image = up1;
