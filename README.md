@@ -9,6 +9,7 @@ RPG game written entireley in Java Swing. This will be a long project, and I'll 
 ![February](/progress/February22.PNG)
 <br>
 <br>
+
 - June '22
 - Added more details to tiles
 - Studied through SNES designed tiles
